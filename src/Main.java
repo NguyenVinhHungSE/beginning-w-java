@@ -17,7 +17,6 @@ public class Main {
                 if(students[i].getMark() < students[j].getMark()){
                     Student x = students[i];
                     students[i] = students[j];
-                    students[j] = x;
                 }
             }
         }
