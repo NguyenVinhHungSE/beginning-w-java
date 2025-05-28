@@ -5,10 +5,20 @@ import java.util.Scanner;
 public class Menu {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter number: ");
-        int n = Integer.parseInt(sc.nextLine());
         String choice;
-        Student[] students = new Student[n];
+        Student[] students = null;
+
+
+        while (students == null){
+            try {
+                System.out.print("Enter number: ");
+                int n = Integer.parseInt(sc.nextLine());
+                students = new Student[n];
+
+            } catch (Exception e) {
+                System.out.println("Error size, Try again: ");;
+            }
+        }
 
         do {
             System.out.println("___MENU___");
@@ -25,7 +35,7 @@ public class Menu {
                     break;
                 }
                 case "2":
-                    sortStudent( students);
+                    sortStudent(students);
                     for (int i = 0; i < students.length; i++) {
                         students[i].showProfile();
                     }
@@ -40,46 +50,51 @@ public class Menu {
                     break;
                 default:
                     System.out.print("Invalid, Enter again: ");
+                    System.out.println(" ");
                     break;
             }
         } while (!choice.equals("4"));
+
     }
 
-    public static void sortStudent(Student[] students){
 
-        for (int i = 0; i < students.length-1; i++) {
-            for (int j = i+1; j < students.length; j++) {
-                if (students[i].getMark() < students[j].getMark()){
-                    Student x;
-                    x = students[i];
-                    students[i] = students[j];
-                    students[j] = x;
-                }
+
+
+public static void sortStudent(Student[] students) {
+
+    for (int i = 0; i < students.length - 1; i++) {
+        for (int j = i + 1; j < students.length; j++) {
+            if (students[i].getMark() < students[j].getMark()) {
+                Student x;
+                x = students[i];
+                students[i] = students[j];
+                students[j] = x;
             }
         }
-
     }
 
-    public static Student input(Scanner sc) {
+}
 
-        System.out.print("Name: ");
-        String name = sc.nextLine();
+public static Student input(Scanner sc) {
 
-        System.out.print("ID: ");
-        String id = sc.nextLine();
+    System.out.print("Name: ");
+    String name = sc.nextLine();
 
-        System.out.print("Age: ");
-        int age = Integer.parseInt(sc.nextLine());
+    System.out.print("ID: ");
+    String id = sc.nextLine();
 
-        System.out.print("Mark: ");
-        double mark = Double.parseDouble(sc.nextLine());
+    System.out.print("Age: ");
+    int age = Integer.parseInt(sc.nextLine());
 
-        return new Student(name, id, age, mark);
+    System.out.print("Mark: ");
+    double mark = Double.parseDouble(sc.nextLine());
+
+    return new Student(name, id, age, mark);
+}
+
+public static void searchId(String indexId, Student[] students) {
+    for (int i = 0; i < students.length; i++) {
+        if ((students[i].getId()).equals(indexId)) students[i].showProfile();
     }
-
-    public static void searchId(String indexId,Student[] students){
-        for (int i = 0; i < students.length; i++) {
-            if ((students[i].getId()).equals(indexId))  students[i].showProfile();
-         }
-    }
+}
 }
