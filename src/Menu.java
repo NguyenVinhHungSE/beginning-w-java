@@ -9,14 +9,15 @@ public class Menu {
         Student[] students = null;
 
 
-        while (students == null){
+        while (students == null) {
             try {
                 System.out.print("Enter number: ");
                 int n = Integer.parseInt(sc.nextLine());
                 students = new Student[n];
 
             } catch (Exception e) {
-                System.out.println("Error size, Try again: ");;
+                System.out.println("Error size, Try again: ");
+                ;
             }
         }
 
@@ -58,43 +59,65 @@ public class Menu {
     }
 
 
+    public static void sortStudent(Student[] students) {
 
-
-public static void sortStudent(Student[] students) {
-
-    for (int i = 0; i < students.length - 1; i++) {
-        for (int j = i + 1; j < students.length; j++) {
-            if (students[i].getMark() < students[j].getMark()) {
-                Student x;
-                x = students[i];
-                students[i] = students[j];
-                students[j] = x;
+        for (int i = 0; i < students.length - 1; i++) {
+            for (int j = i + 1; j < students.length; j++) {
+                if (students[i].getMark() < students[j].getMark()) {
+                    Student x;
+                    x = students[i];
+                    students[i] = students[j];
+                    students[j] = x;
+                }
             }
         }
+
     }
 
-}
+    public static Student input(Scanner sc) {
 
-public static Student input(Scanner sc) {
+        System.out.print("Name: ");
+        String name = sc.nextLine();
 
-    System.out.print("Name: ");
-    String name = sc.nextLine();
+        System.out.print("ID: ");
+        String id = sc.nextLine();
+        int age = 0;
+        double mark = 0;
+        boolean validInput = false;
+        while (!validInput) {
+            try {
+                System.out.print("Age: ");
+                age = Integer.parseInt(sc.nextLine());
+                validInput = true;
+                break;
+            } catch (Exception e) {
+                System.out.print("Incoret format! Try again: ");
+            }
+        }
 
-    System.out.print("ID: ");
-    String id = sc.nextLine();
+        validInput = false;
+        while (!validInput) {
+            try {
+                System.out.print("Mark: ");
+                mark = Double.parseDouble(sc.nextLine());
+                validInput = true;
+                break;
+            } catch (Exception e) {
+                System.out.print("Incoret format! Try again: ");
+            }
+        }
 
-    System.out.print("Age: ");
-    int age = Integer.parseInt(sc.nextLine());
 
-    System.out.print("Mark: ");
-    double mark = Double.parseDouble(sc.nextLine());
-
-    return new Student(name, id, age, mark);
-}
-
-public static void searchId(String indexId, Student[] students) {
-    for (int i = 0; i < students.length; i++) {
-        if ((students[i].getId()).equals(indexId)) students[i].showProfile();
+        return new Student(name, id, age, mark);
     }
-}
+
+    public static void searchId(String indexId, Student[] students) {
+        for (int i = 0; i < students.length; i++) {
+            if ((students[i].getId()).equals(indexId)) {
+                students[i].showProfile();
+                return;
+            }
+        }
+        System.out.println("Can not find student with ID: " + indexId);
+    }
 }
